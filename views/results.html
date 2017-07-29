@@ -5,10 +5,14 @@
   		<h4 class="card-title">{{track.data.name}}</h4>
   		<h6 class="card-subtitle mb-2 text-muted">{{track.data.type}}</h6>
 		<p class="card-text">
-			{{track.data.description}}
+			{{track.data.description}}<br/>
+			<b>Walking time:</b> {{track.data.time | number:1}} hours. <b> Driving Time:</b> {{track.travelTime | number:0}} minutes<br />
+			<b><a href=" https://www.here.com/directions/drive/start:{{currpos[0]}},{{currpos[1]}}/end:{{track.data.startloc[0]}},{{track.data.startloc[1]}}">
+				Get Directions
+			</a></b>
 		</p>
-		<div class="photo" style="background-image: url(https://source.unsplash.com/collection/932809/160x160&sig={{track.data.AssetID}})"></div>
-		<a href="{{track.data.URL}}" class="card-link">Visit DOC</a>
+		<div class="photo" style="background-image: url(https://source.unsplash.com/collection/932809/175x175&sig={{track.data.AssetID}})"></div>
+		<a href="{{track.data.URL}}" class="card-link" target="blank">Visit DOC</a>
 		<!-- <a href="#" class="card-link">Another link</a> -->
   	</div>
   </div>
@@ -58,10 +62,56 @@ function getcurrpos(func) {
 	    navigator.geolocation.getCurrentPosition(function(position){
 	    	currpos[0] = position.coords.latitude;
 			currpos[1] = position.coords.longitude;
+			$scope.$apply(function(){
+				$scope.currpos = currpos;
+			});
 			console.log(currpos[0],currpos[1]);
 			func(currpos);
 	    }, null);
 	}
+}
+
+// JS Markers
+/**
+ * Creates a new marker and adds it to a group
+ * @param {H.map.Group} group       The group holding the new marker
+ * @param {H.geo.Point} coordinate  The location of the marker
+ * @param {String} html             Data associated with the marker
+ */
+function addMarkerToGroup(group, coordinate, html) {
+  var marker = new H.map.Marker(coordinate);
+  // add custom data to the marker
+  marker.setData(html);
+  group.addObject(marker);
+}
+
+/**
+ * Add two markers showing the position of Liverpool and Manchester City football clubs.
+ * Clicking on a marker opens an infobubble which holds HTML content related to the marker.
+ * @param  {H.Map} map      A HERE Map instance within the application
+ */
+function addInfoBubble(map, data) {
+  var group = new H.map.Group();
+
+  map.addObject(group);
+
+  // add 'tap' event listener, that opens info bubble, to the group
+  group.addEventListener('tap', function (evt) {
+    // event target is the marker itself, group is a parent event target
+    // for all objects that it contains
+    var bubble =  new H.ui.InfoBubble(evt.target.getPosition(), {
+      // read custom data
+      content: evt.target.getData()
+    });
+    // show info bubble
+    ui.addBubble(bubble);
+  }, false);
+  for (var i = data.length - 1; i >= 0; i--) {
+	addMarkerToGroup(group, {lat:data[i].latlng[0], lng:data[i].latlng[1]},
+	'<div><a href=\'' + data[i].data.URL + '\' target=\'blank\' >' + data[i].data.name + '</a>' +
+	'</div><div >' + data[i].data.description + '</div>');
+  }
+
 }
 
 /**
@@ -96,6 +146,18 @@ getcurrpos(function() {
 		map.setZoom(12);
 	});
 
+// function addPolylineToMap(map) {
+//   var strip = new H.geo.Strip();
+
+//   strip.pushPoint({lat:53.3477, lng:-6.2597});
+//   strip.pushPoint({lat:51.5008, lng:-0.1224});
+//   strip.pushPoint({lat:48.8567, lng:2.3508});
+//   strip.pushPoint({lat:52.5166, lng:13.3833});
+
+//   map.addObject(new H.map.Polyline(
+//     strip, { style: { lineWidth: 4 }}
+//   ));
+// }
 
 // No we are going to find the route to the nearest doc track
 function calculateRouteFromAtoB () {
@@ -223,6 +285,8 @@ $(document).ajaxStop(function() {
 	$scope.$apply(function(){
 		$scope.top10 = top10;
 	});
+
+	addInfoBubble(map, top10);
 });
 
   </script>
