@@ -1,7 +1,50 @@
   <div id="map" style="width: 100%; height: 400px; background: grey" />
-  <div id="error"></div>
+  
+  <div class="results">
+  	<div class="result" id="{{track.data.AssetID}}" ng-repeat="track in top10">
+  		<h4 class="card-title">{{track.data.name}}</h4>
+  		<h6 class="card-subtitle mb-2 text-muted">{{track.data.type}}</h6>
+		<p class="card-text">
+			{{track.data.description}}
+		</p>
+		<a href="{{track.data.URL}}" class="card-link">Visit DOC</a>
+		<!-- <a href="#" class="card-link">Another link</a> -->
+  	</div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <script  type="text/javascript" charset="UTF-8" >
-    
+	var $scope = angular.element($(".results")).scope();
+
 /**
  * Moves the map to display over Berlin
  *
@@ -79,33 +122,182 @@ function calculateRouteFromAtoB () {
 
 // No we are going to find the route to the nearest doc track
 // Request generation
-var destination = [-35.749740700317169,174.295444099788284];
-var destinations = [{
-		name: "Thingy in the thang.",
-		type: "that",
-		start_latlng: [-35.7497400317169, 174.295444099788284],
-		end_latlng: [-35.7497400317169, 174.295444099788284]
-	}];
+var destshortlist = [];
 getcurrpos(function(currpos) {
 	// First, loop through all possabilities and remove stupid ones (220+ km away)
-	// Shortlist of destinations
-	var destshortlist = [];
-	for (var i = destinations.length - 1; i >= 0; i--) {
-		distto = calcdist(currpos, destinations[i].start_latlng);
-		if (distto < 220000) {
+	// Shortlist of data
+	for (var i = data.length - 1; i >= 0; i--) {
+		disttoStart = calcdist(currpos, data[i].startloc);
+		disttoEnd = calcdist(currpos, data[i].endloc);
+		if (disttoStart < 40000) {
 			destshortlist.push({
-				distance: distto,
-				latlng: destinations[i].start_latlng
+				distance: disttoStart,
+				data: data[i],
+				latlng: data[i].startloc
+			})
+		} else if(disttoEnd < 40000) {
+			destshortlist.push({
+				distance: disttoEnd,
+				data: data[i],
+				latlng: data[i].endloc
 			})
 		}
 	}
 
 	for (var i = destshortlist.length - 1; i >= 0; i--) {
 		var request = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=d7W5yBicQhGmfEwqlJJZ&app_code=-gUT2mGwQYiebtMbctojIw&waypoint0=geo!" + currpos[0] + "," + currpos[1] + "&waypoint1=geo!" + destshortlist[i].latlng[0] + "," + destshortlist[i].latlng[1] + "&mode=fastest;car;traffic:disabled";
-		$.get(request, function(data) {
-			destshortlist[i].travelTime = data.response.route[0].summary.travelTime/60
-		});
+		// console.log(i);
+		dorequest(request, i)
 	}
 })
 
+var destfinalist = [];
+
+function dorequest(request, i) {
+	$.get(request, function(data, status) {
+		// console.log(destshortlist);
+		// console.log(destshortlist[i]);
+		destshortlist[i]["travelTime"] = data.response.route[0].summary.travelTime/60;
+		destfinalist.push( destshortlist[i] );
+	});
+}
+
+$(".spinner-bg").fadeIn();
+
+$(document).ajaxStop(function() {
+  // place code to be executed on completion of last outstanding ajax call here
+  $(".spinner-bg").fadeOut();
+  console.log(destfinalist);
+  // Now we have our potential candidates, let's give each a score
+  scores_travelratio = [];
+  scores_totaltime = [];
+  walklength = parseInt($scope.walklength);
+  for (var i = destfinalist.length - 1; i >= 0; i--) {
+  	// Travel Ratio Score:
+  	// Travel Ratio = time spent walking / total time
+  	scores_travelratio.push((destfinalist[i].data.time*60) / (destfinalist[i].travelTime*2 + destfinalist[i].data.time*60));
+  	// Total Time Score:
+  	// If the total time spent is over the "ideal" ammount, then score = 1 - (2 * actual time)/(ideal time)
+  	// Otherwise, the score = actual time / ideal time
+  	if ((destfinalist[i].data.time * 60 + destfinalist[i].travelTime) > walklength ) {
+  		console.log((destfinalist[i].data.time * 60 + destfinalist[i].travelTime));
+  		score = 1 - (2*(destfinalist[i].data.time * 60 + destfinalist[i].travelTime))/ walklength;
+  		if (score < 0) {score = 0}
+  		scores_totaltime.push(score);
+  	} else {
+  		score = (destfinalist[i].data.time * 60 + destfinalist[i].travelTime * 2) / walklength;
+  		scores_totaltime.push(score);
+  	}
+  }
+  // console.log(scores_travelratio);
+  // console.log(scores_totaltime);
+  // console.log("---------------------------")
+  // Now, let's calculate the normalization:
+  scores_travelratio = normalize(scores_travelratio);
+  scores_totaltime = normalize(scores_totaltime);
+  scores_total = scores_totaltime.map(function (num, idx) {
+    return num + scores_travelratio[idx] * 3;
+  });
+  // console.log(scores_travelratio);
+  // console.log(scores_totaltime);
+  // console.log(scores_total);
+  for (var i = destfinalist.length - 1; i >= 0; i--) {
+  	destfinalist[i]["score"] = scores_total[i]
+  }
+  // And sort by score
+	function compare(a,b) {
+		if (a.score < b.score)
+			return 1;
+		if (a.score > b.score)
+			return -1;
+		return 0;
+	}
+	destfinalist.sort(compare);
+	console.log(destfinalist);
+
+	// Now, let's cut out everything except the top ten
+	top10 = destfinalist.slice(0,9)
+
+	$scope.$apply(function(){
+		$scope.top10 = top10;
+	});
+});
+
   </script>
+<div class="spinner-bg">
+	<div class="spinner">
+	  <div class="rect1"></div>
+	  <div class="rect2"></div>
+	  <div class="rect3"></div>
+	  <div class="rect4"></div>
+	  <div class="rect5"></div>
+	</div>
+</div>
+
+<style type="text/css">
+	.spinner-bg {
+	  width: 100%;
+	  height: 100%;
+	  top: 0px;
+	  left: 0px;
+	  text-align: center;
+	  position: absolute;
+	  background-color: rgba(255,255,255,0.8);
+	}
+
+	.spinner {
+	  margin: 100px auto;
+	  width: 50px;
+	  height: 40px;
+	  text-align: center;
+	  font-size: 10px;
+	  position: absolute;
+	  top: calc(50% - 20px);
+	  left: calc(50% - 25px);
+	}
+
+	.spinner > div {
+	  background-color: #333;
+	  height: 100%;
+	  width: 6px;
+	  display: inline-block;
+	  
+	  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+	  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+	}
+
+	.spinner .rect2 {
+	  -webkit-animation-delay: -1.1s;
+	  animation-delay: -1.1s;
+	}
+
+	.spinner .rect3 {
+	  -webkit-animation-delay: -1.0s;
+	  animation-delay: -1.0s;
+	}
+
+	.spinner .rect4 {
+	  -webkit-animation-delay: -0.9s;
+	  animation-delay: -0.9s;
+	}
+
+	.spinner .rect5 {
+	  -webkit-animation-delay: -0.8s;
+	  animation-delay: -0.8s;
+	}
+
+	@-webkit-keyframes sk-stretchdelay {
+	  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+	  20% { -webkit-transform: scaleY(1.0) }
+	}
+
+	@keyframes sk-stretchdelay {
+	  0%, 40%, 100% { 
+	    transform: scaleY(0.4);
+	    -webkit-transform: scaleY(0.4);
+	  }  20% { 
+	    transform: scaleY(1.0);
+	    -webkit-transform: scaleY(1.0);
+	  }
+	}
+</style>

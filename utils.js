@@ -1,3 +1,34 @@
+function getMaxOfArray(numArray) {
+  return Math.max.apply(null, numArray);
+}
+
+function getMinOfArray(numArray) {
+  return Math.min.apply(null, numArray);
+}
+
+function normalize(input) {
+	var normalized = []
+	var max = getMaxOfArray(input);
+	var min = getMinOfArray(input);
+	console.log(max,min)
+	// Move everything into the positive realm if we have to
+	if (min < 0) {
+		addmin = Math.abs(min)
+		for (var i = input.length - 1; i >= 0; i--) {
+			input[i] += addmin
+		}
+		min = getMinOfArray(input);
+	}
+	// Now let's normalize
+	for (var i = input.length - 1; i >= 0; i--) {
+		// console.log(input[i], (input[i] - min) / (max - min))
+		normalized.push((input[i] - min) / (max - min));
+	}
+	return normalized
+}
+
+
+
 // Taken from https://github.com/HexaCubist/MeetingHall/blob/master/scripts/helper/utils.js - bunch of code for general use mathing stuff.
 Object.defineProperty(Number.prototype, "toRadians", {
 	enumerable: false,

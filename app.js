@@ -22,8 +22,10 @@ app.controller('HomeController', function($scope) {
     });*/
 });
 
-app.controller('ResultsController', function($scope) {
+app.controller('ResultsController', function($scope, $routeParams) {
     $scope.pageClass = "page-results";
+    $scope.top10 = [];
+    $scope.walklength = $routeParams.walklength;
 });
 
 
@@ -37,7 +39,7 @@ app.config(function($routeProvider, $locationProvider) {
         templateUrl : "views/home.html",
         controller: 'HomeController'
     })
-    .when("/results", {
+    .when("/results/:walklength", {
         templateUrl : "views/results.html",
         controller: 'ResultsController'
     })
