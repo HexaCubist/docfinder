@@ -3,8 +3,8 @@
 
 <div class="input-group walklength">
 	<label for="walklength">Generate a {{walklength}} minute walk</label>
-	<input name="walklength" class="form-control" type="range" ng-model="walklength" min="0" max="360" step="5" placeholder="10">
-	<button ng-click="go('/results')" class="btn btn-raised btn-success">Get Started</button>
+	<input name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="360" step="5" placeholder="10">
+	<a ng-href="#/results" class="btn btn-raised btn-success">Get Started</a>
 </div>
 
 <style type="text/css">
