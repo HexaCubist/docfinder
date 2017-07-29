@@ -1,4 +1,8 @@
-<h1>Welcome to Trailgen.</h1>
+<head>
+<link rel="stylesheet" type="text/css" href="home-css.css">
+<link rel="javascript" type=text/js" href="test.js">
+</head>
+<h1 class="title">Welcome to Trailgen.</h1>
 <h3>Trailgen is an easy way to find the right trail for you.</h3>
 
 <div class="input-group walklength">
@@ -25,6 +29,11 @@
 	<input style="margin-left:5%;" name="Calories" class="form-control" type="range" ng-model="Calories" min="30" max="" step="5" placeholder="10">
 </div>
 
+<form action="">
+  <input type="radio" name="Input" value="Time"> Time <br>
+  <input type="radio" name="Input" value="Calories"> Calories <br>
+
+</form>
 
 
 <a ng-href="#/results" class="btn btn-raised btn-success">Get Started</a>
@@ -69,3 +78,4 @@
 		display: block;
 	}
 </style>
+
