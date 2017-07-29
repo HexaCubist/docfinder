@@ -1,10 +1,11 @@
-<script type="text/javascript" src="/convertutils.js"></script>
-<h1 class="title">Welcome to Trailgen.</h1>
+<h1 class="title"><b>Welcome to Trailgen.</b></h1>
 <h3>Trailgen is an easy way to find the right trail for you.</h3>
 
+
+
 <div class="input-group sliders walklength">
-	<label for="walklength">Generate a {{walklength}} minute walk</label>
-	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">30 Minutes</span><span>5 hours</span><span style="float:right;">10 hours</span></div>
+	<label for="walklength">Generate a {{walklength/60}} Hour walk</label>
+	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">30 Minutes</span><span>5 Hours</span><span style="float:right;">10 Hours</span></div>
 	<input style="margin-left:5%;" name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="600" step="5" placeholder="10">
 </div>
 <br>
@@ -21,14 +22,11 @@
 </div>
 <br>
 <div class="input-group sliders Calories">
-	<label for="Calories">Burn {{Calories}} Calories</label>
-	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">some</span><span>burger</span><span style="float:right;">1 birthday cake</span></div>
+	<label for="Calories">Burn {{Calories}} Calories or {{Calories*4.184}} kJ's ({{Calories/295}} Burgers)</label>
+	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">1 Carrot/0.1 Burgers</span><span>28 Carrots/3.3 Burgers</span><span style="float:right;">57 Carrots/6.7 Burgers</span></div>
 	<input style="margin-left:5%;" name="Calories" class="form-control" type="range" ng-model="Calories" min="30" max="2000" step="5" placeholder="10">
 </div>
 
-<form action="">
-  <input type="radio" name="Input" value="Time"> Time <br>
-  <input type="radio" name="Input" value="Calories"> Calories <br>
 
 </form>
 
