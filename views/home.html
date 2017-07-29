@@ -4,7 +4,7 @@
 
 
 <div class="input-group sliders walklength">
-	<label for="walklength">Generate a {{walklength/60}} Hour walk</label>
+	<label for="walklength">Generate a {{walklength/60 | number}} Hour walk</label>
 	<div><span style="float:left;">30 Minutes</span><span>5 hours</span><span style="float:right;">10 hours</span></div>
 	<p class="range-field">
 		<input name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="600" step="5" placeholder="10">
@@ -28,7 +28,7 @@
 </div>
 <br>
 <div class="input-group sliders Calories">
-	<label for="Calories">Burn {{Calories}} Calories ({{Calories*4.184}} kJ's or {{Calories/295}} Burgers)</label>
+	<label for="Calories">Burn {{Calories}} Calories ({{Calories*4.184 | number:0}} kJ's or {{Calories/295 | number}} Burgers)</label>
 	<div><span style="float:left;">1 Carrot/0.1 Burgers</span><span>28 Carrots/3.3 Burgers</span><span style="float:right;">57 Carrots/6.7 Burgers</span></div>
 	<p class="range-field">
 		<input name="Calories" class="form-control" type="range" ng-model="Calories" min="30" max="2000" step="5" placeholder="10">
