@@ -1,0 +1,41 @@
+<h1>Welcome to Trailgen.</h1>
+<h3>Trailgen is an easy way to find the right trail for you.</h3>
+
+<div class="input-group walklength">
+	<label for="walklength">Generate a {{walklength}} minute walk</label>
+	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">30 Minutes</span><span>3 hours</span><span style="float:right;">6 hours</span></div>
+	<input style="margin-left:5%;" name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="360" step="5" placeholder="10">
+</div>
+<br>
+<div class="input-group walklength">
+	<label for="walklength">At a {{walklength}} Speed</label>
+	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">Slow</span><span>Normal</span><span style="float:right;">Fast</span></div>
+	<input style="margin-left:5%;" name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="360" step="5" placeholder="10">
+</div>
+<br>
+<div class="input-group walklength">
+	<label for="walklength">For a weight of {{walklength}}KG</label>
+	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">30KG</span><span>115KG</span><span style="float:right;">200KG</span></div>
+	<input style="margin-left:5%;" name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="200" step="5" placeholder="10">
+</div>
+<br>
+<div class="input-group walklength">
+	<label for="walklength">Generate a {{walklength}} minute walk</label>
+	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">30 Minutes</span><span>3 hours</span><span style="float:right;">6 hours</span></div>
+	<input style="margin-left:5%;" name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="360" step="5" placeholder="10">
+</div>
+
+
+
+<a ng-href="#/results" class="btn btn-raised btn-success">Get Started</a>
+
+<style type="text/css">
+	.walklength {
+		display: block;
+	}
+
+	.walklength input {
+		width: 75% !important;
+		display: block;
+	}
+</style>

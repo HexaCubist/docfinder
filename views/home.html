@@ -3,10 +3,31 @@
 
 <div class="input-group walklength">
 	<label for="walklength">Generate a {{walklength}} minute walk</label>
-	<div><span>30</span><span>3 hours</span><span>6 hours</span></div>
-	<input name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="360" step="5" placeholder="10">
-	<a ng-href="#/results" class="btn btn-raised btn-success">Get Started</a>
+	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">30 Minutes</span><span>3 hours</span><span style="float:right;">6 hours</span></div>
+	<input style="margin-left:5%;" name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="360" step="5" placeholder="10">
 </div>
+<br>
+<div class="input-group Speed">
+	<label for="Speed">At {{Speed}}KPH</label>
+	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">Slow Walk</span><span>Normal Walk</span><span style="float:right;">Fast Walk</span><span></span></div>
+	<input style="margin-left:5%;" name="Speed" class="form-control" type="range" ng-model="Speed" min="1" max="10" step="0.2" placeholder="10">
+</div>
+<br>
+<div class="input-group Weight">
+	<label for="Weight">For a weight of {{Weight}}KG</label>
+	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">30KG</span><span>115KG</span><span style="float:right;">200KG</span></div>
+	<input style="margin-left:5%;" name="Weight" class="form-control" type="range" ng-model="Weight" min="30" max="200" step="5" placeholder="10">
+</div>
+<br>
+<div class="input-group Calories">
+	<label for="Calories">Burn {{Calories}} Calories</label>
+	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">some</span><span>burger</span><span style="float:right;">1 birthday cake</span></div>
+	<input style="margin-left:5%;" name="Calories" class="form-control" type="range" ng-model="Calories" min="30" max="" step="5" placeholder="10">
+</div>
+
+
+
+<a ng-href="#/results" class="btn btn-raised btn-success">Get Started</a>
 
 <style type="text/css">
 	.walklength {
@@ -14,6 +35,36 @@
 	}
 
 	.walklength input {
+		width: 75% !important;
+		display: block;
+	}
+</style>
+<style type="text/css">
+	.Speed {
+		display: block;
+	}
+
+	.Speed input {
+		width: 75% !important;
+		display: block;
+	}
+</style>
+<style type="text/css">
+	.Weight {
+		display: block;
+	}
+
+	.Weight input {
+		width: 75% !important;
+		display: block;
+	}
+</style>
+<style type="text/css">
+	.Calories {
+		display: block;
+	}
+
+	.Calories input {
 		width: 75% !important;
 		display: block;
 	}
