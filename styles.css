@@ -6,7 +6,7 @@
 }
 
 .sliders input {
-	margin: auto;
+	margin: auto !important;
 }
 
 .sliders {
