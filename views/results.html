@@ -7,7 +7,7 @@
 		<p class="card-text">
 			{{track.data.description}}
 		</p>
-		<img src="https://source.unsplash.com/300x300?forest">
+		<div class="photo" style="background-image: url(https://source.unsplash.com/collection/932809/160x160&sig={{track.data.AssetID}})"></div>
 		<a href="{{track.data.URL}}" class="card-link">Visit DOC</a>
 		<!-- <a href="#" class="card-link">Another link</a> -->
   	</div>
@@ -85,6 +85,7 @@ var map = new H.Map(document.getElementById('map'),
 // MapEvents enables the event system
 // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+behavior.disable(H.mapevents.Behavior.WHEELZOOM);
 
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
@@ -92,7 +93,7 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 // Move to the current position (geolocation).
 getcurrpos(function() {
 		map.setCenter({lat:currpos[0], lng:currpos[1]});
-		map.setZoom(14);
+		map.setZoom(12);
 	});
 
 
