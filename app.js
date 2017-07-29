@@ -4,6 +4,7 @@ var app = angular.module("TrailGen", ["ngRoute"]);
 
 app.controller('HomeController', function($scope) {
     $scope.pageClass = "page-welcome";
+    $scope.walklength = "60";
 });
 
 

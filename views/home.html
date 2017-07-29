@@ -1,7 +1,18 @@
 <h1>Welcome to Trailgen.</h1>
 <h3>Trailgen is an easy way to find the right walk for you.</h3>
 
-<div class="input-group">
-	<label for="timelength">Generate a {{timelength}} minute walk</label>
-	<input id="timelength" class="form-control" name="timelength" type="range" ng-model="timelength" min="0" max="360" step="5" placeholder="10">
+<div class="input-group walklength">
+	<label for="walklength">Generate a {{walklength}} minute walk</label>
+	<input name="walklength" class="form-control" type="range" ng-model="walklength" min="0" max="360" step="5" placeholder="10">
 </div>
+
+<style type="text/css">
+	.walklength {
+		display: block;
+	}
+
+	.walklength input {
+		width: 75% !important;
+		display: block;
+	}
+</style>
