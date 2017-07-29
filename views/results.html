@@ -8,21 +8,15 @@
  * @param  {H.Map} map      A HERE Map instance within the application
  */
 //Get the latitude and the longitude;
-var lat;
-var lng;
-function successFunction(position) {
-	lat = position.coords.latitude;
-	lng = position.coords.longitude;
-    console.log(lat,lng);
-    map.setCenter({lat:lat, lng:lng});
-	map.setZoom(14);
-}
-
-function movetocurrpos() {
-	var geocoder;
-	geocoder = new google.maps.Geocoder();
+var currpos = [];
+function getcurrpos(func) {
 	if (navigator.geolocation) {
-	    navigator.geolocation.getCurrentPosition(successFunction, null);
+	    navigator.geolocation.getCurrentPosition(function(position){
+	    	currpos[0] = position.coords.latitude;
+			currpos[1] = position.coords.longitude;
+			console.log(currpos[0],currpos[1]);
+			func(currpos);
+	    }, null);
 	}
 }
 
@@ -52,7 +46,10 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
 // Move to the current position (geolocation).
-movetocurrpos();
+getcurrpos(function() {
+		map.setCenter({lat:currpos[0], lng:currpos[1]});
+		map.setZoom(14);
+	});
 
 
 // No we are going to find the route to the nearest doc track
@@ -63,7 +60,7 @@ function calculateRouteFromAtoB () {
       representation: 'display',
       routeattributes : 'waypoints,summary,shape,legs',
       maneuverattributes: 'direction,action',
-      waypoint0: 'lat,lng', // Brandenburg Gate
+      waypoint0: 'currpos[0],currpos[1]', // Brandenburg Gate
       waypoint1: '-35.749740700317169,174.295444099788284'  // Friedrichstraße Railway Station
     };
 
@@ -78,5 +75,37 @@ function calculateRouteFromAtoB () {
     }
   );
 }
+
+
+// No we are going to find the route to the nearest doc track
+// Request generation
+var destination = [-35.749740700317169,174.295444099788284];
+var destinations = [{
+		name: "Thingy in the thang.",
+		type: "that",
+		start_latlng: [-35.7497400317169, 174.295444099788284],
+		end_latlng: [-35.7497400317169, 174.295444099788284]
+	}];
+getcurrpos(function(currpos) {
+	// First, loop through all possabilities and remove stupid ones (220+ km away)
+	// Shortlist of destinations
+	var destshortlist = [];
+	for (var i = destinations.length - 1; i >= 0; i--) {
+		distto = calcdist(currpos, destinations[i].start_latlng);
+		if (distto < 220000) {
+			destshortlist.push({
+				distance: distto,
+				latlng: destinations[i].start_latlng
+			})
+		}
+	}
+
+	for (var i = destshortlist.length - 1; i >= 0; i--) {
+		var request = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=d7W5yBicQhGmfEwqlJJZ&app_code=-gUT2mGwQYiebtMbctojIw&waypoint0=geo!" + currpos[0] + "," + currpos[1] + "&waypoint1=geo!" + destshortlist[i].latlng[0] + "," + destshortlist[i].latlng[1] + "&mode=fastest;car;traffic:disabled";
+		$.get(request, function(data) {
+			destshortlist[i].travelTime = data.response.route[0].summary.travelTime/60
+		});
+	}
+})
 
   </script>
