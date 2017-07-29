@@ -4,26 +4,34 @@
 
 <div class="input-group sliders walklength">
 	<label for="walklength">Generate a {{walklength}} minute walk</label>
-	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">30 Minutes</span><span>5 hours</span><span style="float:right;">10 hours</span></div>
-	<input style="margin-left:5%;" name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="600" step="5" placeholder="10">
+	<div><span style="float:left;">30 Minutes</span><span>5 hours</span><span style="float:right;">10 hours</span></div>
+	<p class="range-field">
+		<input name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="600" step="5" placeholder="10">
+    </p>
 </div>
 <br>
 <div class="input-group sliders Speed">
 	<label for="Speed">At {{Speed}}KPH</label>
-	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">Slow Walk</span><span>Normal Walk</span><span style="float:right;">Fast Walk</span><span></span></div>
-	<input style="margin-left:5%;" name="Speed" class="form-control" type="range" ng-model="Speed" min="1" max="10" step="0.2" placeholder="10">
+	<div><span style="float:left;">Slow Walk</span><span>Normal Walk</span><span style="float:right;">Fast Walk</span><span></span></div>
+	<p class="range-field">
+		<input name="Speed" class="form-control" type="range" ng-model="Speed" min="1" max="10" step="0.2" placeholder="10">
+    </p>
 </div>
 <br>
 <div class="input-group sliders Weight">
 	<label for="Weight">For a weight of {{Weight}}KG</label>
-	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">30KG</span><span>115KG</span><span style="float:right;">200KG</span></div>
-	<input style="margin-left:5%;" name="Weight" class="form-control" type="range" ng-model="Weight" min="30" max="200" step="5" placeholder="10">
+	<div><span style="float:left;">30KG</span><span>115KG</span><span style="float:right;">200KG</span></div>
+	<p class="range-field">
+		<input name="Weight" class="form-control" type="range" ng-model="Weight" min="30" max="200" step="5" placeholder="10">
+    </p>
 </div>
 <br>
 <div class="input-group sliders Calories">
 	<label for="Calories">Burn {{Calories}} Calories</label>
-	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">some</span><span>burger</span><span style="float:right;">1 birthday cake</span></div>
-	<input style="margin-left:5%;" name="Calories" class="form-control" type="range" ng-model="Calories" min="30" max="2000" step="5" placeholder="10">
+	<div><span style="float:left;">some</span><span>burger</span><span style="float:right;">1 birthday cake</span></div>
+	<p class="range-field">
+		<input name="Calories" class="form-control" type="range" ng-model="Calories" min="30" max="2000" step="5" placeholder="10">
+    </p>
 </div>
 
 <form action="">

@@ -9,13 +9,13 @@ app.controller('HomeController', function($scope) {
     $scope.Weight = "70";
     $scope.Calories = "70";
     $scope.$watch("Calories", function() {
-        $scope.walklength = CaloriesToTimeCal($scope.Speed, $scope.Calories, $scope.Weight);
+        $scope.walklength = Math.round(CaloriesToTimeCal($scope.Speed, $scope.Calories, $scope.Weight));
     });
     $scope.$watch("Weight", function() {
-        $scope.walklength = CaloriesToTimeCal($scope.Speed, $scope.Calories, $scope.Weight);
+        $scope.walklength = Math.round(CaloriesToTimeCal($scope.Speed, $scope.Calories, $scope.Weight));
     });
     $scope.$watch("Speed", function() {
-        $scope.walklength = CaloriesToTimeCal($scope.Speed, $scope.Calories, $scope.Weight);
+        $scope.walklength = Math.round(CaloriesToTimeCal($scope.Speed, $scope.Calories, $scope.Weight));
     });
 });
 
