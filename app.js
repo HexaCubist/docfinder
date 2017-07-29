@@ -21,6 +21,7 @@ app.controller('HomeController', function($scope) {
 
 app.controller('ResultsController', function($scope) {
     $scope.pageClass = "page-results";
+    $scope.top10 = [];
 });
 
 
