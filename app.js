@@ -17,6 +17,9 @@ app.controller('HomeController', function($scope) {
     $scope.$watch("Speed", function() {
         $scope.walklength = Math.round(CaloriesToTimeCal($scope.Speed, $scope.Calories, $scope.Weight));
     });
+/*    $scope.$watch("walklength", function() {
+       $scope.Calories = TimeToCaloriesCal($scope.Speed, $scope.walklength, $scope.Weight);
+    });*/
 });
 
 app.controller('ResultsController', function($scope, $routeParams) {
