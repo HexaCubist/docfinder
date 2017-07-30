@@ -5,7 +5,7 @@
 </div>
 
 <div class="input-group sliders walklength">
-	<label for="walklength">Generate a {{walklength/60}} Hour walk</label>
+	<label for="walklength">Generate a {{(walklength/60) | number:1}} Hour walk</label>
 	<div><span style="float:left;">30 Minutes</span><span>5 Hours</span><span style="float:right;">10 Hours</span></div>
 	<input style="margin-left:5%;" name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="600" step="5" placeholder="10">
 </div>
