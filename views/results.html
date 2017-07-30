@@ -3,13 +3,10 @@
   <div class="results">
   	<div class="result" id="{{track.data.AssetID}}" ng-repeat="track in top10">
   		<h4 class="card-title">{{track.data.name}}</h4>
-  		<h6 class="card-subtitle mb-2 text-muted">{{track.data.type}}</h6>
+  		<h6 class="card-subtitle mb-2 text-muted">{{track.data.type}} - <a href=" https://www.here.com/directions/drive/start:{{currpos[0]}},{{currpos[1]}}/end:{{track.data.startloc[0]}},{{track.data.startloc[1]}}">Get Directions</a></h6>
 		<p class="card-text">
 			{{track.data.description}}<br/>
 			<b>Walking time:</b> {{track.data.time | number:1}} hours. <b> Driving Time:</b> {{track.travelTime | number:0}} minutes<br />
-			<b><a href=" https://www.here.com/directions/drive/start:{{currpos[0]}},{{currpos[1]}}/end:{{track.data.startloc[0]}},{{track.data.startloc[1]}}">
-				Get Directions
-			</a></b>
 		</p>
 		<div class="photo" style="background-image: url(https://source.unsplash.com/collection/932809/175x175&sig={{track.data.AssetID}})"></div>
 		<a href="{{track.data.URL}}" class="card-link" target="blank">Visit DOC</a>

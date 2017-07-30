@@ -1,0 +1,8 @@
+{
+  "name": "TrailGen",
+  "short_name": "TrailGen",
+  "lang": "en-GB",
+  "start_url": "/docfinder/",
+  "display": "standalone",
+  "theme_color": "#559642"
+}
