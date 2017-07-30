@@ -3,7 +3,17 @@
 <head>
 	<!-- Meta -->
 	<title>TrailGen</title>
-	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<link rel="manifest" href="manifest.json">
+
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="application-name" content="TrailGen">
+	<meta name="apple-mobile-web-app-title" content="TrailGen">
+	<meta name="theme-color" content="#559642">
+	<meta name="msapplication-navbutton-color" content="#559642">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="msapplication-starturl" content="/docfinder/">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.min.css" />
@@ -49,6 +59,13 @@
     <script src="data.js"></script>
     <script src="app.js"></script>
 
+	<!-- Service Worker -->
+	<script src="lib/service-worker.js"></script>
+	<script type="text/javascript">
+		if ('serviceWorker' in navigator) {
+		  navigator.serviceWorker.register('service-worker.js');
+		}
+	</script>
     <!-- Init Material Design -->
 	<script type="text/javascript" src="bootstrap-theme/js/material.min.js"></script>
 	<script type="text/javascript" src="bootstrap-theme/js/ripples.min.js"></script>
