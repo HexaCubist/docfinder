@@ -255,7 +255,7 @@ a.card-link {
     margin-right:auto;
     z-index: 100;
     position: relative !important;
-    top: -160;
+    top: -160px;
 }
 
 div#map {
@@ -278,10 +278,9 @@ div#map {
     display: none;
 } 
 
-a.btn.btn-block.btn-raised.btn-success.ng-scope {
-    line-height: 6;
-    width: 50%;
+a.btn.btn-block.btn-raised.btn-success {
+    width: 30%;
     margin: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    line-height: 4;
+    /* font-size: 290%; */
 }
