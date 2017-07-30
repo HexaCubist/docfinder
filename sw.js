@@ -40,13 +40,16 @@ self.addEventListener('install', function(event) {
         'https://fonts.googleapis.com/icon?family=Material+Icons',
         'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css',
         'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js',
-        'https://js.cit.api.here.com/v3/3.0/mapsjs-ui.css',
-        'https://js.cit.api.here.com/v3/3.0/mapsjs-core.js',
-        'https://js.cit.api.here.com/v3/3.0/mapsjs-service.js',
-        'https://js.cit.api.here.com/v3/3.0/mapsjs-ui.js',
-        'https://js.cit.api.here.com/v3/3.0/mapsjs-mapevents.js',
+        // 'https://js.cit.api.here.com/v3/3.0/mapsjs-ui.css',
+        // 'https://js.cit.api.here.com/v3/3.0/mapsjs-core.js',
+        // 'https://js.cit.api.here.com/v3/3.0/mapsjs-service.js',
+        // 'https://js.cit.api.here.com/v3/3.0/mapsjs-ui.js',
+        // 'https://js.cit.api.here.com/v3/3.0/mapsjs-mapevents.js',
         'http://maps.google.com/maps/api/js?sensor=false',
         'https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js',        
       ]);
     })
   );
