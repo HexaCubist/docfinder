@@ -1,5 +1,5 @@
 <!-- Logo :D -->
-<img src="logo-assets/">
+<img src="logo-assets/LogoSemifinal.svg">
 
 <div class="jumbotron" style="text-align: center;">
 	<h1 class="display-3"><b>Welcome to Trailgen.</b></h1>
@@ -14,14 +14,15 @@
 	<div><span style="float:left;">30 Minutes</span><span>5 Hours</span><span style="float:right;">10 Hours</span></div>
 	<input style="margin-left:5%;" name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="600" step="5" placeholder="10">
 </div>
-<br>
-<h6 class="lead" style="text-align: center;"> <em>Or<em></h6>
-<br>
 <div class="input-group sliders Speed">
 	<label for="Speed">At {{Speed}}KPH</label>
 	<div><span style="float:left;">Slow Walk</span><span>Normal Walk</span><span style="float:right;">Fast Walk</span><span></span></div>
 	<input style="margin-left:5%;" name="Speed" class="form-control" type="range" ng-model="Speed" min="1" max="10" step="0.2" placeholder="10">
 </div>
+<br>
+<h6 class="lead" style="text-align: center;"> <em>Or</em></h6>
+<hr>
+<br>
 
 <br>
 <div class="input-group sliders Weight">
@@ -57,6 +58,18 @@
 		margin: auto;
 		line-height: 2;
 		font-size: 290%;
+	}
+	img.ng-scope {
+		width: 500px;
+		margin: auto;
+		position: relative;
+		text-align: center;
+		margin-left: calc(50% - 250px );
+		margin-bottom: -150px;
+	}
+
+	.jumbotron.ng-scope {
+		padding-top: 0px;
 	}
 </style>
 
