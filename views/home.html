@@ -14,17 +14,17 @@
 	<div><span style="float:left;">30 Minutes</span><span>5 Hours</span><span style="float:right;">10 Hours</span></div>
 	<input style="margin-left:5%;" name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="600" step="5" placeholder="10">
 </div>
-<br>
-<h6 class="lead" style="text-align: center;"> <em>Or</em></h6>
-<hr>
+
 <div class="input-group sliders Speed">
 	<label for="Speed">At {{Speed}}KPH</label>
 	<div><span style="float:left;">Slow Walk</span><span>Normal Walk</span><span style="float:right;">Fast Walk</span><span></span></div>
 	<input style="margin-left:5%;" name="Speed" class="form-control" type="range" ng-model="Speed" min="1" max="10" step="0.2" placeholder="10">
 </div>
 
-<br>
 
+<br>
+<h6 class="lead" style="text-align: center;"> <em>Or</em></h6>
+<hr>
 <br>
 <div class="input-group sliders Weight">
 	<label for="Weight">For a weight of {{Weight | number:2}}KG</label>
