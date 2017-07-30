@@ -9,7 +9,7 @@ app.controller('HomeController', function($scope) {
     $scope.Weight = "70";
     $scope.Calories = "500";
     $scope.$watch("Calories", function() {
-        if($($("input[name=Calories]")[0]).is(":focus")) {
+        if($($("input[name=Calories]")[0]).is(":active")) {
             $scope.walklength = Math.round(CaloriesToTimeCal($scope.Speed, $scope.Calories, $scope.Weight));
         }
     });
@@ -20,7 +20,7 @@ app.controller('HomeController', function($scope) {
         $scope.walklength = Math.round(CaloriesToTimeCal($scope.Speed, $scope.Calories, $scope.Weight));
     });
     $scope.$watch("walklength", function() {
-        if($($("input[name=walklength]")[0]).is(":focus")) {
+        if($($("input[name=walklength]")[0]).is(":active")) {
             $scope.Calories = Math.round(TimeToCaloriesCal($scope.Speed, $scope.walklength, $scope.Weight));
         }
     });
