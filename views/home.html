@@ -1,29 +1,30 @@
-<h1 class="title"><b>Welcome to Trailgen.</b></h1>
-<h3>Trailgen is an easy way to find the right trail for you.</h3>
 
-
+<div class="jumbotron" style="text-align: center;">
+	<h1 class="display-3"><b>Welcome to Trailgen.</b></h1>
+	<p class="lead">Trailgen is an easy way to find the right trail for you.</p>
+</div>
 
 <div class="input-group sliders walklength">
 	<label for="walklength">Generate a {{walklength/60}} Hour walk</label>
-	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">30 Minutes</span><span>5 Hours</span><span style="float:right;">10 Hours</span></div>
+	<div><span style="float:left;">30 Minutes</span><span>5 Hours</span><span style="float:right;">10 Hours</span></div>
 	<input style="margin-left:5%;" name="walklength" class="form-control" type="range" ng-model="walklength" min="30" max="600" step="5" placeholder="10">
 </div>
 <br>
 <div class="input-group sliders Speed">
 	<label for="Speed">At {{Speed}}KPH</label>
-	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">Slow Walk</span><span>Normal Walk</span><span style="float:right;">Fast Walk</span><span></span></div>
+	<div><span style="float:left;">Slow Walk</span><span>Normal Walk</span><span style="float:right;">Fast Walk</span><span></span></div>
 	<input style="margin-left:5%;" name="Speed" class="form-control" type="range" ng-model="Speed" min="1" max="10" step="0.2" placeholder="10">
 </div>
 <br>
 <div class="input-group sliders Weight">
-	<label for="Weight">For a weight of {{Weight}}KG</label>
-	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">30KG</span><span>115KG</span><span style="float:right;">200KG</span></div>
+	<label for="Weight">For a weight of {{Weight | number:2}}KG</label>
+	<div><span style="float:left;">30KG</span><span>115KG</span><span style="float:right;">200KG</span></div>
 	<input style="margin-left:5%;" name="Weight" class="form-control" type="range" ng-model="Weight" min="30" max="200" step="5" placeholder="10">
 </div>
 <br>
 <div class="input-group sliders Calories">
-	<label for="Calories">Burn {{Calories}} Calories or {{Calories*4.184}} kJ's ({{Calories/295}} Burgers)</label>
-	<div style="text-align:center;margin-right:20%;margin-left:5%;" ><span style="float:left;">1 Carrot/0.1 Burgers</span><span>28 Carrots/3.3 Burgers</span><span style="float:right;">57 Carrots/6.7 Burgers</span></div>
+	<label for="Calories">Burn {{Calories}} Calories or {{Calories*4.184 | number:2}} kJ's ({{Calories/295 | number:2}} Burgers)</label>
+	<div><span style="float:left;">1 Carrot/0.1 Burgers</span><span>28 Carrots/3.3 Burgers</span><span style="float:right;">57 Carrots/6.7 Burgers</span></div>
 	<input style="margin-left:5%;" name="Calories" class="form-control" type="range" ng-model="Calories" min="30" max="2000" step="5" placeholder="10">
 </div>
 
@@ -31,7 +32,7 @@
 </form>
 
 
-<a ng-href="#/results" class="btn btn-raised btn-success">Get Started</a>
+<a ng-href="#/results" class="btn btn-block btn-raised btn-success">Get Started</a>
 
 <style type="text/css">
 	.sliders {

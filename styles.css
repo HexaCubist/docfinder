@@ -273,3 +273,15 @@ div#map {
 .H_ib_body {
     width: 300px;
 }
+
+.sliders span.thumb.active {
+    display: none;
+} 
+
+a.btn.btn-block.btn-raised.btn-success.ng-scope {
+    line-height: 6;
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}

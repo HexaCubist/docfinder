@@ -7,7 +7,7 @@ app.controller('HomeController', function($scope) {
     $scope.walklength = "60";
     $scope.Speed = "3.2";
     $scope.Weight = "70";
-    $scope.Calories = "70";
+    $scope.Calories = "500";
     $scope.$watch("Calories", function() {
         if($($("input[name=Calories]")[0]).is(":focus")) {
             $scope.walklength = Math.round(CaloriesToTimeCal($scope.Speed, $scope.Calories, $scope.Weight));
