@@ -9,6 +9,10 @@
 	<h6>
 </div>
 <br>
+<div id="basicSearchBox"></div>
+<ul id="basicSearchBoxResults"></ul>
+<!-- <input class="form-control search" type="text" name="search" ng-model="search" placeholder="My Location"> -->
+<br>
 <div class="input-group sliders walklength">
 	<label for="walklength">Generate a {{(walklength/60) | number:1}} Hour walk</label>
 	<div><span style="float:left;">30 Minutes</span><span>5 Hours</span><span style="float:right;">10 Hours</span></div>
@@ -37,9 +41,13 @@
 </form>
 
 
-<a ng-href="#/results/{{walklength}}" class="btn btn-block btn-raised btn-success">Get Started</a>
+<a ng-href="#/results/{{walklength}}/{{search}}" class="btn btn-block btn-raised btn-success">Get Started</a>
 
 <style type="text/css">
+.search {
+    width: 50%;
+    margin: auto;
+}
 	.sliders {
 		display: block;
 	}

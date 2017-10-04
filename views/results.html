@@ -55,16 +55,41 @@
 //Get the latitude and the longitude;
 var currpos = [];
 function getcurrpos(func) {
-	if (navigator.geolocation) {
-	    navigator.geolocation.getCurrentPosition(function(position){
-	    	currpos[0] = position.coords.latitude;
-			currpos[1] = position.coords.longitude;
-			$scope.$apply(function(){
-				$scope.currpos = currpos;
+	console.log($scope.search);
+	console.log($scope);
+	if($scope.search == "My Location" || $scope.search == "" || $scope.search == "My%20Location") {
+		if (navigator.geolocation) {
+		    navigator.geolocation.getCurrentPosition(function(position){
+		    	currpos[0] = position.coords.latitude;
+				currpos[1] = position.coords.longitude;
+				$scope.$apply(function(){
+					$scope.currpos = currpos;
+				});
+				console.log(currpos[0],currpos[1]);
+				func(currpos);
+		    }, null);
+		}
+	} else {
+		var geocodingParams = {
+			searchText: $scope.search,
+		};
+		var onResult = function(result) {
+			console.log(result);
+		  var locations = result.Response.View[0].Result,
+		    position,
+		    marker;
+		  currpos = [locations[0].Location.DisplayPosition.Latitude, locations[1].Location.DisplayPosition.Latitude]
+		};
+		  // Get an instance of the geocoding service:
+			var geocoder = platform.getGeocodingService();
+
+			// Call the geocode method with the geocoding parameters,
+			// the callback and an error callback function (called if a
+			// communication error occurs):
+			console.log(geocodingParams)
+			geocoder.geocode(geocodingParams, onResult, function(e) {
+			  console.log(e);
 			});
-			console.log(currpos[0],currpos[1]);
-			func(currpos);
-	    }, null);
 	}
 }
 

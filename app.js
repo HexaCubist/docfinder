@@ -4,6 +4,7 @@ var app = angular.module("TrailGen", ["ngRoute"]);
 
 app.controller('HomeController', function($scope) {
     $scope.pageClass = "page-welcome";
+    $scope.search = "My Location";
     $scope.walklength = "60";
     $scope.Speed = "3.2";
     $scope.Weight = "70";
@@ -30,6 +31,7 @@ app.controller('ResultsController', function($scope, $routeParams) {
     $scope.pageClass = "page-results";
     $scope.top10 = [];
     $scope.walklength = $routeParams.walklength;
+    $scope.search = $routeParams.location;
 });
 
 
@@ -43,7 +45,7 @@ app.config(function($routeProvider, $locationProvider) {
         templateUrl : "views/home.html",
         controller: 'HomeController'
     })
-    .when("/results/:walklength", {
+    .when("/results/:walklength/:location", {
         templateUrl : "views/results.html",
         controller: 'ResultsController'
     })
